@@ -3,6 +3,7 @@
     <page-header ref="pageHeader" :style="`margin-top: ${multiPage ? 0 : -24}px`" :breadcrumb="breadcrumb" :title="pageTitle" :logo="logo" :avatar="avatar">
       <slot name="action"  slot="action"></slot>
       <slot slot="content" name="headerContent"></slot>
+      <slot slot="content" name="sub-headerContent"></slot>
       <div slot="content" v-if="!this.$slots.headerContent && desc">
         <p>{{desc}}</p>
         <div v-if="this.linkList" class="link">

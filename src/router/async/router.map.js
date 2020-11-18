@@ -159,11 +159,11 @@ const routerMap = {
     name: 'transaction',
     component: () => import('@/pages/transactions/Transaction')
   },
-  // brandDetail: {
-  //   path: '/brands/brand-detail/:brandId',
-  //   name: 'brand-detail',
-  //   component: () => import('@/pages/brands/BrandDetail')
-  // }
+  brandDetail: {
+    path: '/brands/brand-detail',
+    name: 'brand-detail',
+    component: () => import('@/pages/brands/BrandDetail')
+  }
 }
 export default routerMap
 

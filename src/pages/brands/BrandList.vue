@@ -150,13 +150,8 @@ export default {
         this.pagination.pageSize = pageSize
     },
     showDetails(item) {
-      getRoutesConfig().then(result => {
-          const routesConfig = result.data.data
-          loadRoutes(routesConfig)
-          this.$router.push('/brand-detail')
-          this.$message.success('Welcome back')
-      })
-        // this.$router.push('/brands/brand-detail')
+      // this.$router.push({path: '/brands/brand-detail', params: {item: item}})
+      this.$router.push({name: 'Brand detail', params: {id: item.id}})
     }
   },
   filters: {
@@ -209,6 +204,6 @@ export default {
         font-size: 13px;
         color: white !important;
       }
-    }
+  }
 }
 </style>

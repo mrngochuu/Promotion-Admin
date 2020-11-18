@@ -21,11 +21,6 @@ const options = {
       component: () => import('@/pages/exception/403'),
     },
     {
-      path: '/brand-detail',
-      name: 'Brand detail',
-      component: () => import('@/pages/brands/BrandDetail')
-    },
-    {
       path: '/',
       name: 'admin',
       component: TabsView,
@@ -70,10 +65,15 @@ const options = {
               component: () => import('@/pages/brands/BrandList'),
             },
             {
-              path: 'brand-detail',
+              path: 'brand-detail/:id',
               name: 'Brand detail',
               component: () => import('@/pages/brands/BrandDetail')
             },
+            // {
+            //   path: 'brand-detail',
+            //   name: 'Brand detail',
+            //   component: () => import('@/pages/brands/BrandDetail')
+            // },
             // {
             //   path: 'brand',
             //   name: 'analysis',

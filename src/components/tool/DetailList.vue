@@ -88,6 +88,11 @@ export default {
       type: String,
       required: false,
       default: 'horizontal'
+    },
+    image: {
+      type: String,
+      required: false,
+      default: '../../assets/img/brand-default.jpg'
     }
   },
   provide () {

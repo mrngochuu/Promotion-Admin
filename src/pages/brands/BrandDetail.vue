@@ -1,169 +1,178 @@
 <template>
-  <page-layout title="单号：234231029431" logo="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png">
-    <detail-list size="small" :col="2" slot="headerContent">
-      <detail-list-item term="创建人">曲丽丽</detail-list-item>
-      <detail-list-item term="订购产品">XX服务</detail-list-item>
-      <detail-list-item term="创建时间">2018-08-07</detail-list-item>
-      <detail-list-item term="关联单据"><a>12421</a></detail-list-item>
-      <detail-list-item term="生效日期">2018-08-07 ~ 2018-12-11</detail-list-item>
-      <detail-list-item term="备注">请于两个工作日内确认</detail-list-item>
+  <div class="brandDetail">
+  <page-layout :title="brandObject.brandName">
+    <detail-list size="large" :col="1" slot="headerContent">
+      <detail-list-item term="Company">{{ brandObject.companyName }}</detail-list-item>
+      <detail-list-item term="Center address">{{ brandObject.centerAddress }}</detail-list-item>
+      <detail-list-item term="Website">{{ brandObject.website }}</detail-list-item>
+      <detail-list-item term="VAT code">{{ brandObject.vatcode }}</detail-list-item>
+      <detail-list-item term="Description">{{ brandObject.description }}</detail-list-item>
+      <detail-list-item term="Created date">
+        <span>{{ brandObject.createdDate | substringDate }}</span>
+        <div class="div_action">
+                <span v-if="brandObject.isActive" slot="actions"><div class="active">ACTIVE</div></span>
+                <span v-else slot="actions" class="inactive"><div class="inactive">INACTIVE</div></span>
+        </div>
+      </detail-list-item>
+      <img src="../../assets/img/brand-default.jpg" alt="Brand" height="250" style="position: absolute; top: -100px; right: 0px;"/>
+      <detail-list type="inner" title="Contact">
+        <detail-list-item term="Contact person"> {{ brandObject.contactPerson }}</detail-list-item>
+        <detail-list-item term="Phone">{{ brandObject.phoneNumber }}</detail-list-item>
+        <detail-list-item term="Fax">{{ brandObject.fax }}</detail-list-item>
+      </detail-list>
     </detail-list>
-    <template slot="extra">
-      <head-info title="状态" content="待审批" />
-      <head-info title="订单金额" content="¥ 568.08" />
-    </template>
-    <template slot="action">
-      <a-button-group style="margin-right: 8px;">
-        <a-button>操作</a-button>
-        <a-button>操作</a-button>
-        <a-button><a-icon type="ellipsis"/></a-button>
-      </a-button-group>
-      <a-button type="primary" >主操作</a-button>
-    </template>
-    <a-card :bordered="false" title="流程进度">
-      <a-steps :current="1" progress-dot :direction="isMobile ? 'vertical' : 'horizontal'">
-        <a-step title="创建项目">
-          <a-step-item-group :align="isMobile ? 'left' : 'center'" slot="description">
-            <a-step-item link="/dashboard/workplace" title="曲丽丽" icon="dingding-o"/>
-            <a-step-item title="2016-12-12 12:32"/>
-          </a-step-item-group>
-        </a-step>
-        <a-step title="部门初审">
-          <a-step-item-group :align="isMobile ? 'left' : 'center'" slot="description">
-            <a-step-item link="/form/step" title="周毛毛" icon="dingding-o" />
-            <a-step-item link="/result/success" title="催一下" icon="bell"/>
-          </a-step-item-group>
-        </a-step>
-        <a-step title="财务复核">
-        </a-step>
-        <a-step title="完成">
-        </a-step>
-      </a-steps>
-    </a-card>
-    <a-card style="margin-top: 24px" :bordered="false" title="用户信息">
-      <detail-list>
-        <detail-list-item term="用户姓名">付晓晓</detail-list-item>
-        <detail-list-item term="会员卡号">32943898021309809423</detail-list-item>
-        <detail-list-item term="身份证">3321944288191034921</detail-list-item>
-        <detail-list-item term="联系方式">18112345678</detail-list-item>
-        <detail-list-item term="联系地址">浙江省杭州市西湖区黄姑山路工专路交叉路口</detail-list-item>
-      </detail-list>
-      <detail-list title="信息组">
-        <detail-list-item term="某某数据">725</detail-list-item>
-        <detail-list-item term="该数据更新时间">2018-08-08</detail-list-item>
-        <detail-list-item >&nbsp;</detail-list-item>
-        <detail-list-item term="某某数据">725</detail-list-item>
-        <detail-list-item term="该数据更新时间">2018-08-08</detail-list-item>
-        <detail-list-item >&nbsp;</detail-list-item>
-      </detail-list>
-      <a-card type="inner" title="多层信息组">
-        <detail-list title="组名称" size="small">
-          <detail-list-item term="负责人">林东东</detail-list-item>
-          <detail-list-item term="角色码">1234567</detail-list-item>
-          <detail-list-item term="所属部门">XX公司-YY部</detail-list-item>
-          <detail-list-item term="过期时间">2018-08-08</detail-list-item>
-          <detail-list-item term="描述">这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...</detail-list-item>
-        </detail-list>
-        <a-divider style="margin: 16px 0" />
-        <detail-list title="组名称" size="small" :col="1">
-          <detail-list-item term="学名">林东东</detail-list-item>
-          <detail-list-item term="角色码">1234567</detail-list-item>
-          <detail-list-item term="所属部门">XX公司-YY部</detail-list-item>
-          <detail-list-item term="过期时间">2018-08-08</detail-list-item>
-          <detail-list-item term="描述">这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...</detail-list-item>
-        </detail-list>
-        <a-divider style="margin: 16px 0" />
-        <detail-list title="组名称" size="small" :col="2">
-          <detail-list-item term="学名">林东东</detail-list-item>
-          <detail-list-item term="角色码">1234567</detail-list-item>
-          <detail-list-item term="所属部门">XX公司-YY部</detail-list-item>
-          <detail-list-item term="过期时间">2018-08-08</detail-list-item>
-          <detail-list-item term="描述">这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...</detail-list-item>
-        </detail-list>
-      </a-card>
-    </a-card>
-    <a-card style="margin-top: 24px" :bordered="false" title="用户近半年来电记录">
-      <a-list></a-list>
-    </a-card>
     <a-card
       style="margin-top: 24px"
       :bordered="false"
-      :tabList="tabList"
-      :activeTabKey="activeTabKey"
-      @tabChange="(key) => {this.activeTabKey = key}"
+      title="Store list"
     >
-      <a-table
-        v-if="activeTabKey === '1'"
-        :columns="operationColumns"
-        :dataSource="operation1"
-        :pagination="false"
-      />
-      <a-table
-        v-if="activeTabKey === '2'"
-        :columns="operationColumns"
-        :dataSource="operation2"
-        :pagination="false"
-      />
-      <a-table
-        v-if="activeTabKey === '3'"
-        :columns="operationColumns"
-        :dataSource="operation3"
-        :pagination="false"
-      />
+      <div slot="extra">
+        <a-radio-group v-model="activeMode">
+          <a-radio-button value='0'>All status</a-radio-button>
+          <a-radio-button value='1'>Active</a-radio-button>
+          <a-radio-button value='2'>Inactive</a-radio-button>
+        </a-radio-group>
+        <a-input-search style="margin-left: 16px; width: 272px;" placeholder="Title" v-model="storeValue" />
+      </div>
+      <a-list size="large">
+          <standard-table
+            :columns="columns"
+            :dataSource="showList"
+          >
+        <template slot="statusTitle">
+          <a-icon @click.native="onStatusTitleClick" type="info-circle" />
+        </template>
+      </standard-table>
+      </a-list>
     </a-card>
   </page-layout>
+  </div>
 </template>
 
 <script>
 import PageLayout from '@/layouts/PageLayout'
+import StandardTable from '@/components/table/StandardTable'
 import DetailList from '@/components/tool/DetailList'
-import AStepItem from '@/components/tool/AStepItem'
 import {operation1, operation2, operation3, operationColumns} from '@/mock/common/tableData'
 import {mapState} from 'vuex'
-import HeadInfo from '@/components/tool/HeadInfo';
+// import HeadInfo from '@/components/tool/HeadInfo';
+
+import {getBrandById,getStoreByBrandId} from '@/services/brand'
 
 
 const DetailListItem = DetailList.Item
-const AStepItemGroup = AStepItem.Group
-
-const tabList = [
-  {
-    key: '1',
-    tab: '操作日志一'
-  },
-  {
-    key: '2',
-    tab: '操作日志二'
-  },
-  {
-    key: '3',
-    tab: '操作日志三'
-  }
-]
 
 export default {
   name: 'BrandDetail',
-  components: {HeadInfo, AStepItemGroup, AStepItem, DetailListItem, DetailList, PageLayout},
+  components: {DetailListItem, DetailList, PageLayout, StandardTable},
   data () {
     return {
-      tabList,
-      operationColumns,
-      operation1,
-      operation2,
-      operation3,
-      activeTabKey: '2'
+      storeValue: '',
+      brandObject: {},
+      storeList: [],
+      activeMode: '0',
+      columns: [
+        {title: 'Store', dataIndex: 'storeName'},
+        // {title: 'BirthDate', dataIndex: 'dateOfBirth'},
+        {title: 'Address', dataIndex: 'address'},
+        // {title: 'Phone', dataIndex: 'phone'},
+        {title: 'Open time', dataIndex: 'openTime'},
+        // {title: 'Address', dataIndex: 'userAddress'},
+        {title: 'Close time', dataIndex: 'closeTime'},
+        {title: 'Report date', dataIndex: 'reportDateStr'},
+        {title: 'Available', dataIndex: 'avaiableStr'},
+        {title: 'Active', dataIndex: 'activeStr'}
+      ],
     }
+  },
+  mounted () {
+    this.initPage()
   },
   computed: {
-    ...mapState('setting', ['isMobile'])
-  },
-  methods: {
-    onTabChange (key) {
-      console.log(key)
+    showList () {
+      let result = this.storeList
+      if(this.storeValue !== null || this.storeValue !== '' ) {
+        result = result.filter(item => item.storeName.includes(this.storeValue))
+      }
+      if(this.activeMode === '1') {
+        result = result.filter(item => item.isActive)
+      }
+      if(this.activeMode === '2') {
+        result = result.filter(item => !item.isActive)
+      }
+      return result
     }
   },
+  methods: {
+    initPage () {
+      let brandId = this.$router.currentRoute.params.id
+      if(brandId === undefined || brandId === null || brandId === '' || isNaN(parseInt(brandId))) {
+        this.$router.push('/brands/brand-list')
+      } else {
+        new Promise((resolve, reject) => {
+          resolve()
+        }).then(res => {
+          return getBrandById(brandId)
+        }).then(res => {
+          this.brandObject = res.data
+        }).then(res => {
+          return getStoreByBrandId(brandId)
+        }).then(res => {
+          this.storeList = res.data
+          this.storeList.forEach(element => {
+            element.activeStr = element.isActive.toString()
+            element.avaiableStr = element.isAvailable.toString()
+            element.reportDateStr = element.reportDate.toString().substring(0,10)
+          })
+        })
+      }
+      
+    },
+  },
+  filters: {
+    substringDate (text) {
+        if(text !== null || text !== '')
+        return text.substring(0,10);
+    }
+  }
 }
 </script>
 
 <style lang="less" scoped>
+.brandDetail {
+  .list-content-item{
+    color: @text-color-second;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    margin-left: 40px;
+    span{
+      line-height: 20px;
+    }
+    p{
+      margin: 4px 0 0;
+      line-height: 22px;
+    }
+  }
+  .div_action {
+      display: inline;
+      margin-left: 30px;
+      .active {
+        background-color: green;
+        display: inline;
+        border-radius: 5px;
+        padding: 2px 20px;
+        font-size: 13px;
+        color: white !important;
+      }
+      .inactive {
+        background-color: red;
+        display: inline;
+        border-radius: 5px;
+        padding: 2px 7px;
+        font-size: 13px;
+        color: white !important;
+      }
+  }
+}
 </style>

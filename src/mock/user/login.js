@@ -10,7 +10,6 @@ const user = Mock.mock({
 Mock.mock(`${process.env.VUE_APP_API_BASE_URL}/login`, 'post', ({body}) => {
   let result = {}
   const {name, password} = JSON.parse(body)
-  debugger
 
   if (name !== 'admin' || password !== '888888') {
     result.code = -1
