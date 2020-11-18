@@ -1,19 +1,19 @@
 <template>
   <a-card :bordered="false" class="search-form">
     <a-form :form="form">
-      <form-row label="User" style="padding-bottom: 11px">
+      <form-row label="Brand" style="padding-bottom: 11px">
         <a-row>
           <a-col :offset="1" :span="8" class="components-input-demo-presuffix">
             <a-form-item :wrapperCol="{span: 24}">
-              <a-input ref="userNameInput" v-model="userName" placeholder="Username" @change="searchUser">
-                <a-icon slot="prefix" type="user" />
+              <a-input ref="userNameInput" v-model="brandName" placeholder="Brand name" @change="searchBrand">
+                <a-icon slot="prefix"><i class="fas fa-bold"></i></a-icon>
               </a-input>
             </a-form-item>
           </a-col>
           <a-col :offset="1" :span="8" class="components-input-demo-presuffix">
             <a-form-item :wrapperCol="{span: 24}">
-              <a-input ref="TitleInput" v-model="title" placeholder="Title" @change="searchTitle">
-                <a-icon slot="prefix" type="file-search" />
+              <a-input ref="TitleInput" v-model="companyName" placeholder="Company name" @change="searchCompany">
+                <a-icon slot="prefix"><i class="far fa-building"></i></a-icon>
               </a-input>
             </a-form-item>
           </a-col>
@@ -31,18 +31,20 @@
       </form-row>
       <form-row label="Options" v-show="optionFlg">
         <a-row>
-          <a-col :span="6" style="margin-left: 23px;">
-            <a-form-item :wrapperCol="{span: 24}">
-              <a-select placeholder="Status" v-model="status">
-                <a-select-option value="0">All status</a-select-option>
-                <a-select-option value="1">Watting</a-select-option>
-                <a-select-option value="2">Processing</a-select-option>
-                <a-select-option value="3">Complete</a-select-option>
-              </a-select>
+          <a-col :offset="0" :span="9">
+            <a-form-item :wrapperCol="{span: 24}"
+            >
+              <a-range-picker
+                format="YYYY-MM-DD"
+                :placeholder="['Created from', 'Created to']"
+                v-model="time"
+                style="margin-left: 30px; width: 336px;"
+              />
             </a-form-item>
           </a-col>
-          <a-col :offset="1" :span="6">
-            <a-form-item :wrapperCol="{span: 24}"
+
+          <a-col :offset="1" :span="8" >
+            <a-form-item :wrapperCol="{span: 24}" style="margin-left: -7px;"
             >
               <a-select placeholder="Active" v-model="active">
                 <a-select-option value="0">All active</a-select-option>
@@ -71,29 +73,29 @@ export default {
     return {
       form: this.$form.createForm(this),
       optionFlg: false,
-      status: '0',
       active: '0',
-      userName: '',
-      title: '',
+      brandName: '',
+      companyName: '',
+      time: []
     }
   },
   watch: {
-    status () {
-      this.$emit('status-change', this.status)
+    time () {
+      this.$emit('search-time', this.time)
     },
     active () {
-      this.$emit('active-change', this.active)
+      this.$emit('search-active', this.active)
     }
   },
   methods: {
     lookOption () {
       this.optionFlg = !this.optionFlg
     },
-    searchUser () {
-      this.$emit('search-user', this.userName)
+    searchBrand () {
+      this.$emit('search-brand', this.brandName)
     },
-    searchTitle () {
-      this.$emit('search-title', this.title)
+    searchCompany () {
+      this.$emit('search-company', this.companyName)
     }
   }
 }

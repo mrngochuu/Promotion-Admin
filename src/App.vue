@@ -68,7 +68,7 @@ export default {
     setHtmlTitle() {
       const route = this.$route
       const key = route.path === '/' ? 'home.name' : getI18nKey(route.matched[route.matched.length - 1].path)
-      document.title = 'Problem Resolving' + ' | ' + this.$t(key)
+      document.title = 'Promotion' + ' | ' + this.$t(key)
     },
   }
 }

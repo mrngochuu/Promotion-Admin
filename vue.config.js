@@ -31,7 +31,7 @@ const assetsCDN = {
     '//cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js',
     '//cdn.jsdelivr.net/npm/@antv/data-set@0.11.4/build/data-set.min.js',
     '//cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js'
-  ]
+  ],
 }
 
 module.exports = {
@@ -67,7 +67,6 @@ module.exports = {
     )
     // Ignore all locale files of moment.js
     config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
-    // 生产环境下将资源压缩成gzip格式
     if (isProd) {
       // add `CompressionWebpack` plugin to webpack plugins
       config.plugins.push(new CompressionWebpackPlugin({
@@ -83,7 +82,6 @@ module.exports = {
     }
   },
   chainWebpack: config => {
-    // 生产环境下关闭css压缩的 colormin 项，因为此项优化与主题色替换功能冲突
     if (isProd) {
       config.plugin('optimize-css')
         .tap(args => {
@@ -91,7 +89,6 @@ module.exports = {
           return args
         })
     }
-    // 生产环境下使用CDN
     if (isProd) {
       config.plugin('html')
         .tap(args => {

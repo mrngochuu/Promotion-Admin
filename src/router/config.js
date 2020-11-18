@@ -21,6 +21,11 @@ const options = {
       component: () => import('@/pages/exception/403'),
     },
     {
+      path: '/brand-detail',
+      name: 'Brand detail',
+      component: () => import('@/pages/brands/BrandDetail')
+    },
+    {
       path: '/',
       name: 'admin',
       component: TabsView,
@@ -52,29 +57,46 @@ const options = {
         //   ]
         // },
         {
-          path: 'user',
-          name: 'Manage user',
+          path: 'brands',
+          name: 'Manage brand',
           meta: {
-            icon: 'user',
+            icon: 'brand',
           },
-          component: () => import('@/pages/users/User'),
+          component: BlankView,
+          children: [
+            {
+              path: 'brand-list',
+              name: 'Brand list',
+              component: () => import('@/pages/brands/BrandList'),
+            },
+            {
+              path: 'brand-detail',
+              name: 'Brand detail',
+              component: () => import('@/pages/brands/BrandDetail')
+            },
+            // {
+            //   path: 'brand',
+            //   name: 'analysis',
+            //   component: () => import('@/pages/dashboard/analysis'),
+            // }
+          ]
         },
-        {
-          path: 'request',
-          name: 'Manage request',
-          meta: {
-            icon: 'form'
-          },
-          component: () => import('@/pages/requests/Request'),
-        },
-        {
-          path: 'transaction',
-          name: 'Manage transaction',
-          meta: {
-            icon: 'transaction'
-          },
-          component: () => import('@/pages/transactions/Transaction')
-        }
+        // {
+        //   path: 'request',
+        //   name: 'Manage brand',
+        //   meta: {
+        //     icon: 'form'
+        //   },
+        //   component: () => import('@/pages/requests/Request'),
+        // },
+        // {
+        //   path: 'transaction',
+        //   name: 'Manage transaction',
+        //   meta: {
+        //     icon: 'transaction'
+        //   },
+        //   component: () => import('@/pages/transactions/Transaction')
+        // }
       ]
     },
   ]

@@ -3,7 +3,7 @@ import {request, METHOD, removeAuthorization} from '@/utils/request'
 
 export async function login(name, password) {
   return request(LOGIN, METHOD.POST, {
-    email: name,
+    username: name,
     password: password
   })
 }
@@ -24,7 +24,6 @@ export function logout() {
 }
 export default {
   login,
-  logout,
   getRoutesConfig,
-  getUserList
+  logout
 }

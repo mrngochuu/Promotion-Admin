@@ -15,8 +15,8 @@ module.exports = {
   weekMode: false,                     
   multiPage: false,                     
   hideSetting: false,                   
-  systemName: 'Problem Resolving',        
-  copyright: 'Problem Resolving',     
+  systemName: 'Promotion',        
+  copyright: 'Promotion',     
   asyncRoutes: false,                   
   showPageTitle: true,                  
   filterMenu: true,                    
@@ -26,7 +26,7 @@ module.exports = {
     direction: 'left'                   
   },
   footerLinks: [                        
-    {link: '#', name: 'Problem Resolving'},
+    {link: '#', name: 'Promotion'},
     {link: '#', icon: 'github'},
     {link: '#', name: 'Developer team'}
   ],

@@ -3,12 +3,12 @@ import Cookie from 'js-cookie'
 
 const xsrfHeaderName = 'Authorization'
 
-axios.defaults.timeout = 5000
+axios.defaults.timeout = 10000
 axios.defaults.withCredentials= true
 axios.defaults.xsrfHeaderName= xsrfHeaderName
 axios.defaults.xsrfCookieName= xsrfHeaderName
 
-// 认证类型
+
 const AUTH_TYPE = {
   BEARER: 'Bearer',
   BASIC: 'basic',
@@ -45,10 +45,6 @@ function setAuthorization(auth, authType = AUTH_TYPE.BEARER) {
   }
 }
 
-/**
- * 移出认证信息
- * @param authType {AUTH_TYPE} 认证类型
- */
 function removeAuthorization(authType = AUTH_TYPE.BEARER) {
   switch (authType) {
     case AUTH_TYPE.BEARER:
@@ -62,11 +58,6 @@ function removeAuthorization(authType = AUTH_TYPE.BEARER) {
   }
 }
 
-/**
- * 检查认证信息
- * @param authType
- * @returns {boolean}
- */
 function checkAuthorization(authType = AUTH_TYPE.BEARER) {
   switch (authType) {
     case AUTH_TYPE.BEARER:
@@ -83,14 +74,8 @@ function checkAuthorization(authType = AUTH_TYPE.BEARER) {
   return false
 }
 
-/**
- * 加载 axios 拦截器
- * @param interceptors
- * @param options
- */
 function loadInterceptors(interceptors, options) {
   const {request, response} = interceptors
-  // 加载请求拦截器
   request.forEach(item => {
     let {onFulfilled, onRejected} = item
     if (!onFulfilled || typeof onFulfilled !== 'function') {
@@ -104,7 +89,6 @@ function loadInterceptors(interceptors, options) {
       error => onRejected(error, options)
     )
   })
-  // 加载响应拦截器
   response.forEach(item => {
     let {onFulfilled, onRejected} = item
     if (!onFulfilled || typeof onFulfilled !== 'function') {
@@ -120,11 +104,6 @@ function loadInterceptors(interceptors, options) {
   })
 }
 
-/**
- * 解析 url 中的参数
- * @param url
- * @returns {Object}
- */
 function parseUrlParams(url) {
   const params = {}
   if (!url || url === '' || typeof url !== 'string') {

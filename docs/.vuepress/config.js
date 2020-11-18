@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'Problem Resolving',
-  description: 'Problem Resolving Admin',
+  title: 'Promotion',
+  description: 'Promotion - Admin',
   base: '/vue-antd-admin-docs/',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }]

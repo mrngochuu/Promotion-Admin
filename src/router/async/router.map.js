@@ -143,18 +143,27 @@ const routerMap = {
     name: 'palette',
     component: () => import('@/pages/components/Palette')
   },
-  user: {
-    name: 'user',
-    component: () => import('@/pages/users/User')
-  },
-  request: {
-    name: 'request',
-    component: () => import('@/pages/requests/Request')
+  // user: {
+  //   name: 'user',
+  //   component: () => import('@/pages/users/User')
+  // },
+  // request: {
+  //   name: 'request',
+  //   component: () => import('@/pages/requests/Request')
+  // },
+  brand: {
+    name: 'brand-list',
+    component: () => import('@/pages/brands/BrandList')
   },
   transaction: {
     name: 'transaction',
     component: () => import('@/pages/transactions/Transaction')
-  }
+  },
+  // brandDetail: {
+  //   path: '/brands/brand-detail/:brandId',
+  //   name: 'brand-detail',
+  //   component: () => import('@/pages/brands/BrandDetail')
+  // }
 }
 export default routerMap
 

@@ -5,7 +5,6 @@
         <img alt="logo" class="logo" src="@/assets/img/logo.png" />
         <span class="title">{{systemName}}</span>
       </div>
-      <div class="desc">YOUR ISSUER YOUR KNOWLEDGE</div>
     </div>
     <div class="login">
       <a-form @submit="onSubmit" :form="form">
@@ -84,29 +83,26 @@ export default {
     },
     afterLogin(res) {
       this.logging = false
-      const loginRes = res.data
-      if (loginRes.result != null) {
+      
+      
+      if (res.status === 200) {
+        const loginRes = res.data
         this.setUser(
           {
-            'name': loginRes.result.email,
-            'fullname': loginRes.result.fullname,
-            'address': loginRes.result.address,
-            'phoneNumber': loginRes.result.phoneNumber,
-            'role': loginRes.result.role.id
+            'name': loginRes.user.userName,
+            'email': loginRes.user.email,
+            'fullname': loginRes.user.fullname,
+            'role': loginRes.user.role
           }
         )
 
-
-        // const {user, permissions, roles} = loginRes.data
-        // this.setUser(user)
-        this.setPermissions(['add', 'edit', 'delete'])
-        this.setRoles(loginRes.result.role.id)
-        setAuthorization({token: loginRes.result.token, expireAt: ((new Date()).getDate() + 5)})
+        this.setRoles(loginRes.user.role)
+        setAuthorization({token: loginRes.token, expireAt: ((new Date()).getDate() + 90)})
         getRoutesConfig().then(result => {
           const routesConfig = result.data.data
           loadRoutes(routesConfig)
-          this.$router.push('/user')
-          this.$message.success('Welcome back, ' + loginRes.result.fullname + '.', 3)
+          this.$router.push('/brands/brand-list')
+          this.$message.success('Welcome back, ' + loginRes.user.fullname + '.', 3)
         })
       } else {
         this.error = 'Invalid username or password!'
