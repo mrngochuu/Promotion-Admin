@@ -163,7 +163,11 @@ const routerMap = {
     path: '/brands/brand-detail',
     name: 'brand-detail',
     component: () => import('@/pages/brands/BrandDetail')
-  }
+  },
+  promotionCreate: {
+    name: 'create-promotion',
+    component: () => import('@/pages/promotions/PromotionForm')
+  },
 }
 export default routerMap
 

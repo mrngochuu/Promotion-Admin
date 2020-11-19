@@ -84,28 +84,33 @@ export default {
     afterLogin(res) {
       this.logging = false
       
-      
       if (res.status === 200) {
-        const loginRes = res.data
-        this.setUser(
-          {
-            'name': loginRes.user.userName,
-            'email': loginRes.user.email,
-            'fullname': loginRes.user.fullname,
-            'role': loginRes.user.role
-          }
-        )
+        if(res.data.user.role.toLowerCase() === 'administrator') {
+          const loginRes = res.data
+          this.setUser(
+            {
+              'name': loginRes.user.userName,
+              'email': loginRes.user.email,
+              'fullname': loginRes.user.fullname,
+              'role': loginRes.user.role
+            }
+          )
 
-        this.setRoles(loginRes.user.role)
-        setAuthorization({token: loginRes.token, expireAt: ((new Date()).getDate() + 90)})
-        getRoutesConfig().then(result => {
-          const routesConfig = result.data.data
-          loadRoutes(routesConfig)
-          this.$router.push('/brands/brand-list')
-          this.$message.success('Welcome back, ' + loginRes.user.fullname + '.', 3)
-        })
+          this.setRoles(loginRes.user.role)
+          setAuthorization({token: loginRes.token, expireAt: ((new Date()).getDate() + 90)})
+          getRoutesConfig().then(result => {
+            const routesConfig = result.data.data
+            loadRoutes(routesConfig)
+            this.$router.push('/brands/brand-list')
+            this.$message.success('Welcome back, ' + loginRes.user.fullname + '.', 3)
+          })
+        } else {
+          this.error = "You don't have permission to access!"
+          return
+        }
       } else {
         this.error = 'Invalid username or password!'
+        return
       }
     }
   }

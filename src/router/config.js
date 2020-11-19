@@ -81,6 +81,21 @@ const options = {
             // }
           ]
         },
+        {
+          path: 'promotion',
+          name: 'Manage promotion',
+          meta: {
+            icon: 'form'
+          },
+          component: BlankView,
+          children: [
+            {
+              path: 'create',
+              name: 'Create promotion',
+              component: () => import('@/pages/promotions/PromotionForm')
+            },
+          ]
+        }
         // {
         //   path: 'request',
         //   name: 'Manage brand',
