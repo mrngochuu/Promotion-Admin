@@ -606,7 +606,7 @@
             <a-row>
                 <a-col :offset="1" :span="22">
                     <a-form-item>
-                    <a-button :loading="logging" style="width: 100%; height: 40px; border-radius: 5px; margin-top: 24px; font-weight: bold; font-size: 18px;" size="large" htmlType="submit" type="primary">Create</a-button>
+                    <a-button :loading="creating" style="width: 100%; height: 40px; border-radius: 5px; margin-top: 24px; font-weight: bold; font-size: 18px;" size="large" htmlType="submit" type="primary">Create</a-button>
                     </a-form-item>
                 </a-col>
             </a-row>
@@ -697,7 +697,7 @@ export default {
         store: [],
         promotionDetail: [],
       },
-      logging: false,
+      creating: false,
       form: this.$form.createForm(this)
     }
   },
@@ -778,38 +778,43 @@ export default {
       e.preventDefault()
       this.form.validateFields((err) => {
         if (!err) {
+            
             let _this = this
+            _this.creating = true
             createPromotion(_this.objectChange).then(res => {
                 if(res.data.toLowerCase() === 'success') {
-                    this.$message.success('Creating new promotion is successful.')
-                    this.clearAllData()
+                    _this.$message.success('Creating new promotion is successful.')
+                    _this.creating = false
+                    return
                 } else {
-                    this.error.promotionError = res.data
+                    _this.error.promotionError = res.data
+                    _this.creating = false
+                    return
                 }
             })
         }
       })
     },
 
-    clearAllData () {
-        this.brandStr = '',
-        this.storeStr = '',
-        this.promotion.name = ''
-        this.promotion.className = ''
-        this.promotion.code = ''
-        this.promotion.startTime = null
-        this.promotion.expirationDate = undefined,
-        this.promotion.shortDescription = '',
-        this.promotion.description = '',
-        this.promotion.brandId = undefined,
-        this.promotion.storeId = undefined,
-        this.promotion.level = '',
-        this.promotion.fromHappyHour = null,
-        this.promotion.toHappyHour = null,
-        this.promotionDetail = []
-        this.clearConditionLevelData()
-        this.list.listPromotionDetail = []
-    },
+    // clearAllData () {
+    //     this.brandStr = '',
+    //     this.storeStr = '',
+    //     this.promotion.name = ''
+    //     this.promotion.className = ''
+    //     this.promotion.code = ''
+    //     this.promotion.startTime = null
+    //     this.promotion.expirationDate = undefined,
+    //     this.promotion.shortDescription = '',
+    //     this.promotion.description = '',
+    //     this.promotion.brandId = undefined,
+    //     this.promotion.storeId = undefined,
+    //     this.promotion.level = '',
+    //     this.promotion.fromHappyHour = null,
+    //     this.promotion.toHappyHour = null,
+    //     this.promotionDetail = []
+    //     this.clearConditionLevelData()
+    //     this.list.listPromotionDetail = []
+    // },
     showProductCondition () {
         this.product.condition.visible = true
     },
