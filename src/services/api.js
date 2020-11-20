@@ -5,6 +5,7 @@ const BASE_URL_VUE_APP = process.env.VUE_APP_API_BASE_URL
 module.exports = {
   LOGIN: `${BASE_URL}/auth/login`,
   BRANDS: `${BASE_URL}/brands`,
+  PROMOTIONS: `${BASE_URL}/promotions`,
   ROUTES: `${BASE_URL_VUE_APP}/routes`,
   GOODS: `${BASE_URL_VUE_APP}/goods`,
 }

@@ -1,8 +1,9 @@
-import {STORES} from '@/services/api'
+import {PROMOTIONS} from '@/services/api'
 import {request, METHOD} from '@/utils/request'
 
-export async function createPromotion() {
-  return request(STORES, METHOD.POST)
+const CREATE = '/create-promotion'
+export async function createPromotion(param) {
+  return request(PROMOTIONS + CREATE, METHOD.POST, param)
 }
 
 export default {
